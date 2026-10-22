@@ -2,19 +2,22 @@ package com.sb.chatbot.chat.service;
 
 import com.sb.chatbot.chat.dto.request.ChatRequest;
 import com.sb.chatbot.chat.dto.response.ChatResult;
-import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.metadata.Usage;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
 public class ChatService {
 
     // Spring AI에서 제공하는 LLM. 호출용 클라이언트
     // API 형태로 호출하며 프롬프트 구성, 호출, 응답 파싱 등을 담당
+    // 자동 구성은 ChatClient.Builder만 빈으로 등록하므로 빌더로 생성
     private final ChatClient chatClient;
+
+    public ChatService(ChatClient.Builder chatClientBuilder) {
+        this.chatClient = chatClientBuilder.build();
+    }
 
     public ChatResult ask(ChatRequest request) {
         long start = System.currentTimeMillis();
