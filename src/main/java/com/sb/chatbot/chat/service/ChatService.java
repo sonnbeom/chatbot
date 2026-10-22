@@ -27,7 +27,7 @@ public class ChatService {
                 .call() // 동기 호출로 LLM에게 보냄 stream은 .stream()을 사용 반환 타입은 callResponseSpec
                 .chatResponse();
         long elapseMs = System.currentTimeMillis() - start;
-        Usage usage = response.getMetadata().getUsage();
+        Usage usage = response.getMetadata().getUsage(); // Usage는 LLM호출에서 사용한 토큰 수 정보를 담은 인터페이스
 
        return ChatResult.builder()
             .answer(response.getResult().getOutput().getText())

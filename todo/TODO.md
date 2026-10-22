@@ -1,7 +1,7 @@
-# TODO (갱신: 2026-10-22, 커밋 1979e1f)
+# TODO (갱신: 2026-10-22, 커밋 23c61c1)
 ## 이번에 한 일
-- 커밋 시 로드맵 체크와 TODO를 자동 갱신하는 post-commit 훅 및 프롬프트 추가
-- CLAUDE.md 추가, .gitignore 수정
+- 모델을 exaone3.5:2.4b로 변경, num-predict 제한 및 repeat-penalty 상향 (application.yaml, ChatService)
+- compose.yaml 삭제, build.gradle/CLAUDE.md/.gitignore 정리
 ## 다음에 할 일
 - [ ] 개발 환경 설치 체크리스트 완료 (JDK 21, Ollama, 모델 pull)
 - [ ] 가상의 사내 FAQ 20~30항목 작성
