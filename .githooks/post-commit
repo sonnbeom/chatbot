@@ -1,0 +1,30 @@
+#!/bin/sh
+# 커밋 후: 로드맵 MD 체크박스 갱신 + todo/TODO.md 재작성 (claude -p 사용)
+# 훅이 만든 변경은 커밋하지 않고 working tree에 남긴다. 로그: todo/.hook.log
+
+# 재귀/중복 실행 방지
+[ -n "$CLAUDE_TODO_HOOK" ] && exit 0
+command -v claude >/dev/null 2>&1 || exit 0
+
+ROOT=$(git rev-parse --show-toplevel) || exit 0
+cd "$ROOT" || exit 0
+mkdir -p todo
+
+COMMIT=$(git rev-parse --short HEAD)
+MSG=$(git log -1 --pretty=%B)
+FILES=$(git show --name-status --pretty=format: HEAD)
+PROMPT=$(cat .githooks/todo-prompt.md)
+
+(
+  export CLAUDE_TODO_HOOK=1
+  printf '%s\n\n## 이번 커밋\n- 해시: %s\n- 메시지: %s\n- 변경 파일:\n%s\n\n자세한 diff는 `git show %s` 로 확인하세요.\n' \
+    "$PROMPT" "$COMMIT" "$MSG" "$FILES" "$COMMIT" \
+  | claude -p \
+      --allowedTools "Read" "Glob" "Grep" "Edit" "Write" "Bash(git show:*)" "Bash(git log:*)" "Bash(git diff:*)" \
+      --permission-mode acceptEdits \
+      >> todo/.hook.log 2>&1
+  echo "--- done $COMMIT $(date '+%F %T')" >> todo/.hook.log
+) >/dev/null 2>&1 &
+
+echo "[post-commit] 로드맵 체크 + TODO 갱신을 백그라운드로 실행 중 (로그: todo/.hook.log)"
+exit 0
