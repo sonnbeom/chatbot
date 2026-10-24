@@ -21,10 +21,15 @@ spring:
           num-predict: 300       # 출력 최대 토큰. 반복 루프가 생겨도 여기서 끊김 모델이 한번엔 생성할 수 있는 최대 토큰 수에요. 토큰은 대략 단어 조각 단위인데, 한국어는 한 글자가 1~2토큰 정도 먹는 경우가 많아서 200~300글자 안팎의 답변
           repeat-penalty: 1.15   # 같은 말 반복에 벌점 (기본 1.1)  이미 나온 단어를 다시 쓰려고 할 때 점수를 깎는 정도 1.0이면 벌점 없음 값이 클수록 같은 단어나 표현의 재사용을 강하게 억제합니다. 작은 모델의 경우 반복이 많아서 점수를 높여줍니다.
           num-ctx: 8192          # 추가: 컨텍스트 윈도우 크기 ollama 기본 값은 2048 토큰인데 FAQ 30개를 통째로 넣으면 이보다 깁니다. 이 설정이 없으면 에러 없이 앞 부분이 잘려서 모델이 FAQ 일부만 보고 답합니다.
-
+      embedding:
+        options:
+          model: bge-m3   # 실험 B에서 bge-m3로 바꿔볼 예정
 faqbot:
   prompt:
-    system: classpath:prompts/faq-system-v1.st
+    system: classpath:prompts/faq-rag-v1.st
+  rag:
+    top-k: 3
+    similarity-threshold: 0.5     # 처음엔 다 받고, 점수를 보고 정할 예정
 
 
 
