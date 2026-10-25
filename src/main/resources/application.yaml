@@ -30,6 +30,9 @@ faqbot:
   rag:
     top-k: 3
     similarity-threshold: 0.5     # 처음엔 다 받고, 점수를 보고 정할 예정
+  report:
+    questions: classpath:eval/questions.txt   # POST /chat/report 로 돌릴 질문 목록
+    dir: ./reports                            # 결과 md 저장 위치
 
 
 

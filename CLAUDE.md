@@ -11,7 +11,8 @@ Stack: Java 21, Spring Boot 4.1.x, Spring AI 2.0.x (BOM-managed), Ollama (local 
 ## Commands
 
 ```
-ollama pull llama3.2:3b     # chat model (also nomic-embed-text for embeddings per roadmap)
+ollama pull exaone3.5:2.4b  # chat model
+ollama pull bge-m3          # embedding model (nomic-embed-text is the roadmap default, kept for comparison)
 ./gradlew bootRun           # app on port 4200
 ./gradlew test
 ./gradlew test --tests com.sb.chatbot.ChatbotApplicationTests
@@ -23,7 +24,7 @@ ollama pull llama3.2:3b     # chat model (also nomic-embed-text for embeddings p
 
 Single Spring Boot app, package `com.sb.chatbot`, feature-first layout: `chat/{controller,service,dto/request,dto/response}`. Currently `POST /chat` → `ChatController` → `ChatService.ask` → Spring AI `ChatClient` (Ollama), returning `ChatResult` (answer, input/output tokens, elapsed ms). Token/latency metrics in the response are deliberate: the roadmap's later weeks build observability and evaluation on them.
 
-Config lives in `src/main/resources/application.yaml` (Ollama at `localhost:11434`, model `llama3.2:3b`, H2 file DB at `./data/chatbot`, JPA `ddl-auto: update`). Vector store is a `SimpleVectorStore` bean (to be defined in week 3 RAG work; no auto-configuration).
+Config lives in `src/main/resources/application.yaml` (Ollama at `localhost:11434`, chat model `exaone3.5:2.4b`, embedding model `bge-m3`, H2 file DB at `./data/chatbot`, JPA `ddl-auto: update`). Vector store is a `SimpleVectorStore` bean defined in `chat/config/AiConfig` (no auto-configuration). If Ollama returns `HTTP 404 model '...' not found`, the configured model hasn't been pulled.
 
 ## Git hook
 
