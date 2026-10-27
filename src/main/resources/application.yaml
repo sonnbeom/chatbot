@@ -36,6 +36,9 @@ faqbot:
     dir: ./reports                            # 결과 md 저장 위치
   eval:
     dataset: classpath:eval/eval-cases.json   # 평가 하네스용 케이스 (기대 FAQ, 필수/금지 문구, 모범 답안)
+    judge:
+      model: exaone3.5:2.4b
+      prompt: classpath:prompts/judge-v1.st
 
 
 
