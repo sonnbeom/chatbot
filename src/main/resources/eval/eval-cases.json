@@ -1,0 +1,212 @@
+[
+  {
+    "id": "c01", "category": "in_doc",
+    "question": "연차는 1년에 며칠인가요?",
+    "expectedFaqIds": ["Q01"],
+    "mustInclude": ["17일"], "mustNotInclude": [],
+    "referenceAnswer": "입사 1년 이상이면 연 17일입니다. 1년 미만은 매월 개근 시 1일씩 최대 11일이며, 3년차부터 2년마다 1일씩 늘어 최대 25일입니다."
+  },
+  {
+    "id": "c02", "category": "in_doc",
+    "question": "연차 신청은 며칠 전까지 해야 하나요?",
+    "expectedFaqIds": ["Q02"],
+    "mustInclude": ["3영업일|3 영업일"], "mustNotInclude": [],
+    "referenceAnswer": "누리HR에서 사용일 기준 최소 3영업일 전에 신청하고 팀장 승인을 받아야 합니다."
+  },
+  {
+    "id": "c03", "category": "in_doc",
+    "question": "반반차도 쓸 수 있나요?",
+    "expectedFaqIds": ["Q02"],
+    "mustInclude": ["없|불가능|할 수 없"], "mustNotInclude": [],
+    "referenceAnswer": "반반차(2시간)는 없습니다. 반차(4시간)만 사용할 수 있습니다."
+  },
+  {
+    "id": "c04", "category": "in_doc",
+    "question": "남은 연차는 며칠까지 다음 해로 넘길 수 있나요?",
+    "expectedFaqIds": ["Q03"],
+    "mustInclude": ["5일"], "mustNotInclude": [],
+    "referenceAnswer": "최대 5일까지 이월할 수 있으며, 다음 해 3월 31일까지 써야 합니다."
+  },
+  {
+    "id": "c05", "category": "in_doc",
+    "question": "리프레시 휴가는 며칠이고 휴가비는 얼마인가요?",
+    "expectedFaqIds": ["Q04"],
+    "mustInclude": ["10일", "100만"], "mustNotInclude": [],
+    "referenceAnswer": "근속 3년마다 유급 리프레시 휴가 10일과 휴가비 100만 원을 받습니다."
+  },
+  {
+    "id": "c06", "category": "in_doc",
+    "question": "병가는 1년에 며칠 쓸 수 있나요?",
+    "expectedFaqIds": ["Q05"],
+    "mustInclude": ["5일"], "mustNotInclude": [],
+    "referenceAnswer": "연차와 별도로 연 5일의 유급 병가가 있습니다."
+  },
+  {
+    "id": "c07", "category": "in_doc",
+    "question": "제가 결혼하면 휴가를 며칠 받나요?",
+    "expectedFaqIds": ["Q06"],
+    "mustInclude": ["5일"], "mustNotInclude": [],
+    "referenceAnswer": "본인 결혼 시 휴가 5일과 경조금 50만 원을 받습니다."
+  },
+  {
+    "id": "c08", "category": "in_doc",
+    "question": "배우자 출산 휴가는 며칠인가요?",
+    "expectedFaqIds": ["Q06"],
+    "mustInclude": ["20일"], "mustNotInclude": [],
+    "referenceAnswer": "배우자 출산 시 휴가 20일과 경조금 30만 원을 받습니다."
+  },
+  {
+    "id": "c09", "category": "in_doc",
+    "question": "코어타임이 언제인가요?",
+    "expectedFaqIds": ["Q08"],
+    "mustInclude": ["11시", "4시|16시"], "mustNotInclude": [],
+    "referenceAnswer": "코어타임은 오전 11시부터 오후 4시까지입니다."
+  },
+  {
+    "id": "c10", "category": "in_doc",
+    "question": "재택근무는 일주일에 몇 번 할 수 있나요?",
+    "expectedFaqIds": ["Q09"],
+    "mustInclude": ["2회|2번|두 번"], "mustNotInclude": [],
+    "referenceAnswer": "주 2회까지 가능하며, 화요일과 목요일은 팀 출근일이라 재택근무를 할 수 없습니다."
+  },
+  {
+    "id": "c11", "category": "in_doc",
+    "question": "초과근무하면 수당이 나오나요?",
+    "expectedFaqIds": ["Q11"],
+    "mustInclude": ["보상휴가"], "mustNotInclude": [],
+    "referenceAnswer": "수당으로는 지급하지 않고, 초과근무 시간의 1.5배를 보상휴가로 적립합니다."
+  },
+  {
+    "id": "c12", "category": "in_doc",
+    "question": "점심 식대는 얼마까지 지원되나요?",
+    "expectedFaqIds": ["Q13"],
+    "mustInclude": ["12,000|12000|1만 2천"], "mustNotInclude": [],
+    "referenceAnswer": "출근한 날 점심은 1인 12,000원까지 법인카드로 지원합니다."
+  },
+  {
+    "id": "c13", "category": "in_doc",
+    "question": "복지 포인트는 1년에 얼마인가요?",
+    "expectedFaqIds": ["Q14"],
+    "mustInclude": ["120만"], "mustNotInclude": [],
+    "referenceAnswer": "연 120만 원을 매년 1월 1일에 지급합니다."
+  },
+  {
+    "id": "c14", "category": "in_doc",
+    "question": "복지 포인트로 상품권을 살 수 있나요?",
+    "expectedFaqIds": ["Q14"],
+    "mustInclude": ["불가능|할 수 없|쓸 수 없|안 됩니다"], "mustNotInclude": [],
+    "referenceAnswer": "상품권 구매에는 복지 포인트를 쓸 수 없습니다."
+  },
+  {
+    "id": "c15", "category": "in_doc",
+    "question": "교육비 지원 한도는 얼마인가요?",
+    "expectedFaqIds": ["Q16"],
+    "mustInclude": ["200만"], "mustNotInclude": [],
+    "referenceAnswer": "1인당 연 200만 원 한도로 지원하며, 팀장 승인이 필요합니다."
+  },
+  {
+    "id": "c16", "category": "in_doc",
+    "question": "업무용 노트북은 몇 년마다 바꿔주나요?",
+    "expectedFaqIds": ["Q19"],
+    "mustInclude": ["3년"], "mustNotInclude": [],
+    "referenceAnswer": "노트북 교체 주기는 3년입니다."
+  },
+  {
+    "id": "c17", "category": "in_doc",
+    "question": "비밀번호는 몇 자 이상이어야 하나요?",
+    "expectedFaqIds": ["Q23"],
+    "mustInclude": ["12자"], "mustNotInclude": [],
+    "referenceAnswer": "비밀번호는 12자 이상이어야 하며 90일마다 바꿔야 합니다."
+  },
+  {
+    "id": "c18", "category": "in_doc",
+    "question": "서울로 출장 갈 때 숙박비 한도는 얼마인가요?",
+    "expectedFaqIds": ["Q27"],
+    "mustInclude": ["12만"], "mustNotInclude": [],
+    "referenceAnswer": "국내 출장 숙박비는 1박 10만 원 한도이며, 서울은 12만 원 한도입니다."
+  },
+  {
+    "id": "c19", "category": "paraphrase",
+    "question": "아파서 3일 쉬려는데 뭐가 필요해?",
+    "expectedFaqIds": ["Q05"],
+    "mustInclude": ["진단서"], "mustNotInclude": [],
+    "referenceAnswer": "병가를 3일 이상 연속으로 쓰면 진단서를 누리HR에 올려야 합니다."
+  },
+  {
+    "id": "c20", "category": "paraphrase",
+    "question": "수습인데 재택해도 돼?",
+    "expectedFaqIds": ["Q09", "Q12"],
+    "mustInclude": ["불가능|할 수 없|안 됩니다|안 돼"], "mustNotInclude": [],
+    "referenceAnswer": "불가능합니다. 수습 기간에는 재택근무를 할 수 없습니다."
+  },
+  {
+    "id": "c21", "category": "paraphrase",
+    "question": "재택 중에 노트북이 고장 나면?",
+    "expectedFaqIds": ["Q21"],
+    "mustInclude": ["it-help", "퀵"], "mustNotInclude": [],
+    "referenceAnswer": "슬랙 #it-help 채널에 알리면, 재택 중인 경우 IT팀이 대여용 노트북을 퀵서비스로 보내줍니다."
+  },
+  {
+    "id": "c22", "category": "paraphrase",
+    "question": "재택하는 날도 점심값 나와?",
+    "expectedFaqIds": ["Q13"],
+    "mustInclude": ["지원하지 않|지원되지 않|나오지 않|불가능"], "mustNotInclude": [],
+    "referenceAnswer": "재택근무일에는 식대를 지원하지 않습니다."
+  },
+  {
+    "id": "c23", "category": "paraphrase",
+    "question": "입사 2년차면 휴가 며칠이야?",
+    "expectedFaqIds": ["Q01"],
+    "mustInclude": ["17일"], "mustNotInclude": [],
+    "referenceAnswer": "입사 1년 이상이므로 연차는 연 17일입니다."
+  },
+  {
+    "id": "c24", "category": "paraphrase",
+    "question": "미국 출장 갈 때 비행기 좌석 등급은 뭐야?",
+    "expectedFaqIds": ["Q28"],
+    "mustInclude": ["프리미엄"], "mustNotInclude": [],
+    "referenceAnswer": "비행시간이 6시간 이상이면 프리미엄 이코노미석을 탈 수 있습니다. 미국 출장은 이에 해당합니다."
+  },
+  {
+    "id": "c25", "category": "out_of_doc",
+    "question": "육아휴직은 얼마나 쓸 수 있어?",
+    "expectedFaqIds": [],
+    "mustInclude": ["FAQ에서 확인되지 않"], "mustNotInclude": [],
+    "referenceAnswer": "FAQ에서 확인되지 않는 내용입니다. 슬랙 #hr-help 채널에 문의해주세요."
+  },
+  {
+    "id": "c26", "category": "out_of_doc",
+    "question": "스톡옵션 주나요?",
+    "expectedFaqIds": [],
+    "mustInclude": ["FAQ에서 확인되지 않"], "mustNotInclude": [],
+    "referenceAnswer": "FAQ에서 확인되지 않는 내용입니다. 슬랙 #hr-help 채널에 문의해주세요."
+  },
+  {
+    "id": "c27", "category": "out_of_doc",
+    "question": "연봉 인상률은 보통 몇 퍼센트인가요?",
+    "expectedFaqIds": [],
+    "mustInclude": ["FAQ에서 확인되지 않"], "mustNotInclude": [],
+    "referenceAnswer": "FAQ에서 확인되지 않는 내용입니다. 슬랙 #hr-help 채널에 문의해주세요."
+  },
+  {
+    "id": "c28", "category": "out_of_doc",
+    "question": "해외 지사로 파견 근무를 갈 수 있나요?",
+    "expectedFaqIds": [],
+    "mustInclude": ["FAQ에서 확인되지 않"], "mustNotInclude": [],
+    "referenceAnswer": "FAQ에서 확인되지 않는 내용입니다. 슬랙 #hr-help 채널에 문의해주세요."
+  },
+  {
+    "id": "c29", "category": "out_of_doc",
+    "question": "퇴직금은 어떻게 계산하나요?",
+    "expectedFaqIds": [],
+    "mustInclude": ["FAQ에서 확인되지 않"], "mustNotInclude": [],
+    "referenceAnswer": "FAQ에서 확인되지 않는 내용입니다. 슬랙 #hr-help 채널에 문의해주세요."
+  },
+  {
+    "id": "c30", "category": "out_of_doc",
+    "question": "사내 어린이집이 있나요?",
+    "expectedFaqIds": [],
+    "mustInclude": ["FAQ에서 확인되지 않"], "mustNotInclude": [],
+    "referenceAnswer": "FAQ에서 확인되지 않는 내용입니다. 슬랙 #hr-help 채널에 문의해주세요."
+  }
+]

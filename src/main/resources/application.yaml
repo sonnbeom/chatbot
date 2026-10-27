@@ -5,12 +5,13 @@ spring:
   application:
     name: chatbot
   datasource:
-    url: jdbc:h2:file:./data/chatbot
+    url: jdbc:h2:file:./data/faqbot
     username: sa
     password:
   jpa:
     hibernate:
       ddl-auto: update
+    open-in-view: false
   ai:
     ollama:
       base-url: http://localhost:11434
@@ -33,6 +34,8 @@ faqbot:
   report:
     questions: classpath:eval/questions.txt   # POST /chat/report 로 돌릴 질문 목록
     dir: ./reports                            # 결과 md 저장 위치
+  eval:
+    dataset: classpath:eval/eval-cases.json   # 평가 하네스용 케이스 (기대 FAQ, 필수/금지 문구, 모범 답안)
 
 
 

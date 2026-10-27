@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,6 +69,7 @@ public class ChatReportService {
 
         StringBuilder table = new StringBuilder("| # | 질문 | 기대 | 검색 결과 (점수) | 판정 | 전체 ms |\n|---|---|---|---|---|---|\n");
         StringBuilder details = new StringBuilder();
+        List<ReportResult.Item> items = new ArrayList<>();
         int passed = 0;
 
         for (int i = 0; i < cases.size(); i++) {
@@ -75,6 +77,7 @@ public class ChatReportService {
             ChatResult result = chatService.ask(c.question());
             Verdict verdict = judge(c.expected(), result.sources());
             if (verdict.passed()) passed++;
+            items.add(new ReportResult.Item(c.question(), c.expected(), verdict.label, result));
 
             String expected = c.expected().isEmpty() ? "없음" : String.join(", ", c.expected());
             String sources = formatSources(result.sources(), c.expected());
@@ -115,7 +118,7 @@ public class ChatReportService {
         Path file = dir.resolve(now.format(FILE_TIME) + ".md");
         Files.writeString(file, markdown, StandardCharsets.UTF_8);
 
-        return new ReportResult(file.toAbsolutePath().normalize().toString(), cases.size(), passed);
+        return new ReportResult(file.toAbsolutePath().normalize().toString(), cases.size(), passed, items);
     }
 
     private List<Case> loadCases() throws IOException {

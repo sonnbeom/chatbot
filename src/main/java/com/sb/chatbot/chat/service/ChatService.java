@@ -26,12 +26,20 @@ public class ChatService {
     @Value("${faqbot.prompt.system}")
     private Resource systemPrompt;
 
+    private static final String REFUSAL = "FAQ에서 확인되지 않는 내용입니다. 슬랙 #hr-help 채널에 문의해주세요.";
+
     public ChatResult ask(String question) {
         long start = System.currentTimeMillis();
 
         // 1. 검색
         List<Document> docs = faqRetriever.search(question);
         long retrievalMs = System.currentTimeMillis() - start;
+
+                // 검색 결과가 없으면 모델을 부르지 않고 바로 거절
+        if (docs.isEmpty()) {
+            return new ChatResult(REFUSAL, List.of(), 0, 0,
+                    retrievalMs, 0, System.currentTimeMillis() - start);
+        }
 
         String context = docs.isEmpty()
                 ? "(관련 FAQ 없음)"

@@ -24,7 +24,7 @@ ollama pull bge-m3          # embedding model (nomic-embed-text is the roadmap d
 
 Single Spring Boot app, package `com.sb.chatbot`, feature-first layout: `chat/{controller,service,dto/request,dto/response}`. Currently `POST /chat` → `ChatController` → `ChatService.ask` → Spring AI `ChatClient` (Ollama), returning `ChatResult` (answer, input/output tokens, elapsed ms). Token/latency metrics in the response are deliberate: the roadmap's later weeks build observability and evaluation on them.
 
-Config lives in `src/main/resources/application.yaml` (Ollama at `localhost:11434`, chat model `exaone3.5:2.4b`, embedding model `bge-m3`, H2 file DB at `./data/chatbot`, JPA `ddl-auto: update`). Vector store is a `SimpleVectorStore` bean defined in `chat/config/AiConfig` (no auto-configuration). If Ollama returns `HTTP 404 model '...' not found`, the configured model hasn't been pulled.
+Config lives in `src/main/resources/application.yaml` (Ollama at `localhost:11434`, chat model `exaone3.5:2.4b`, embedding model `bge-m3`, H2 file DB at `./data/faqbot`, JPA `ddl-auto: update`). Vector store is a `SimpleVectorStore` bean defined in `chat/config/AiConfig` (no auto-configuration). If Ollama returns `HTTP 404 model '...' not found`, the configured model hasn't been pulled.
 
 ## Git hook
 
