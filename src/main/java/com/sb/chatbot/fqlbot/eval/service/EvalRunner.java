@@ -8,9 +8,7 @@ import com.sb.chatbot.fqlbot.eval.domain.EvalRun;
 import com.sb.chatbot.fqlbot.eval.dto.EvalCase;
 import com.sb.chatbot.fqlbot.eval.repository.EvalResultRepository;
 import com.sb.chatbot.fqlbot.eval.repository.EvalRunRepository;
-import com.sb.chatbot.fqlbot.eval.scorer.KeywordScorer;
-import com.sb.chatbot.fqlbot.eval.scorer.RetrievalScorer;
-import com.sb.chatbot.fqlbot.eval.scorer.ScoreResult;
+import com.sb.chatbot.fqlbot.eval.scorer.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +27,7 @@ public class EvalRunner {
     private final KeywordScorer keywordScorer;
     private final EvalRunRepository runRepository;
     private final EvalResultRepository resultRepository;
+    private final LlmJudgeScorer llmJudgeScorer;
 
         // ── 시험 당시 설정을 기록하려고 yml 값을 읽어옴 (📋 이해 불필요) ──
     @Value("${spring.ai.ollama.chat.options.model}")
@@ -57,25 +56,31 @@ public class EvalRunner {
         }
 
         // 2. 이번 시럼 기록 시작
-        EvalRun evalRun = new EvalRun(note, chatModel, embeddingModel, promptVersion, topK, similarityThreshold, temperature);
-        EvalRun run = runRepository.save(evalRun);
+        EvalRun run = runRepository.save(new EvalRun(
+                note, chatModel, embeddingModel, promptVersion, topK, similarityThreshold, temperature,
+                llmJudgeScorer.model()));
 
-        // 3. 문제마다 챗봇에게 묻고 채점하고 저장
+        // ③ 문제마다: 챗봇에게 묻고 → 채점 3종 → 저장
         List<EvalResult> results = new ArrayList<>();
         for (int i = 0; i < cases.size(); i++) {
             EvalCase evalCase = cases.get(i);
 
-            ChatResult answer  = ask(evalCase.question());
-            Boolean hit = RetrievalScorer.hit(evalCase, answer.sources());
-            ScoreResult keyword = keywordScorer.score(evalCase, answer.answer());
-            results.add(resultRepository.save(new EvalResult(run, evalCase, answer, hit, keyword)));
-            log.info("[{}/{}] {} 키워드={} 검색={} ({} ms)",
-                    i + 1, cases.size(), evalCase.id(), keyword.pass(), hit, answer.elapsedMs());
+            ChatResult answer = ask(evalCase.question());                              // 챗봇 호출
+            Boolean hit = RetrievalScorer.hit(evalCase, answer.sources());             // 검색 채점
+            ScoreResult keyword = keywordScorer.score(evalCase, answer.answer());      // 키워드 채점
+            JudgeResult judge = llmJudgeScorer.score(evalCase, answer.answer());       // ★ LLM 채점
+
+            results.add(resultRepository.save(new EvalResult(run, evalCase, answer, hit, keyword, judge)));
+            log.info("[{}/{}] {} 키워드={} LLM={}점 검색={} ({} ms)",
+                    i + 1, cases.size(), evalCase.id(), keyword.pass(), judge.score(), hit, answer.elapsedMs());
         }
+
+        // ④ 합계 계산해서 저장
         run.finish(results);
         runRepository.save(run);
         return run.getId();
     }
+
 
     private ChatResult ask(String question){
         try {

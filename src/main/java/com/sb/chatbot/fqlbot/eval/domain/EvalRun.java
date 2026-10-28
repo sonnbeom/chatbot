@@ -29,18 +29,22 @@ public class EvalRun {
     private int topK;
     private double similarityThreshold;
     private double temperature;
+    private String judgeModel;           // ★
 
     // 합계
     private int totalCases;
     private int keywordPassCount;
     private int retrievalCaseCount;
     private int retrievalHitCount;
+    private Integer judgePassCount;      // ★
+    private Integer judgeErrorCount;     // ★
     private long totalInputTokens;
     private long totalOutputTokens;
     private long avgGenerationMs;
 
     public EvalRun(String note, String chatModel, String embeddingModel, String promptVersion,
-                   int topK, double similarityThreshold, double temperature) {
+                   int topK, double similarityThreshold, double temperature,
+                   String judgeModel) {                                       // ★
         this.note = note;
         this.chatModel = chatModel;
         this.embeddingModel = embeddingModel;
@@ -48,6 +52,7 @@ public class EvalRun {
         this.topK = topK;
         this.similarityThreshold = similarityThreshold;
         this.temperature = temperature;
+        this.judgeModel = judgeModel;                                         // ★
         this.startedAt = LocalDateTime.now();
     }
 
@@ -57,6 +62,8 @@ public class EvalRun {
         this.keywordPassCount = (int) results.stream().filter(EvalResult::isKeywordPass).count();
         this.retrievalCaseCount = (int) results.stream().filter(r -> r.getRetrievalHit() != null).count();
         this.retrievalHitCount = (int) results.stream().filter(r -> Boolean.TRUE.equals(r.getRetrievalHit())).count();
+        this.judgePassCount = (int) results.stream().filter(r -> Boolean.TRUE.equals(r.getJudgePass())).count();   // ★
+        this.judgeErrorCount = (int) results.stream().filter(r -> r.getJudgePass() == null).count();              // ★
         this.totalInputTokens = results.stream().map(EvalResult::getInputTokens)
                 .filter(Objects::nonNull).mapToLong(Integer::longValue).sum();
         this.totalOutputTokens = results.stream().map(EvalResult::getOutputTokens)

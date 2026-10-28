@@ -2,6 +2,7 @@ package com.sb.chatbot.fqlbot.eval.domain;
 
 import com.sb.chatbot.chat.dto.response.ChatResult;
 import com.sb.chatbot.fqlbot.eval.dto.EvalCase;
+import com.sb.chatbot.fqlbot.eval.scorer.JudgeResult;
 import com.sb.chatbot.fqlbot.eval.scorer.ScoreResult;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -41,13 +42,19 @@ public class EvalResult {
     @Column(length = 1000)
     private String keywordReason;
 
+    private Integer judgeScore;          // ★
+    private Boolean judgePass;           // ★
+
+    @Column(length = 1000)
+    private String judgeReason;          // ★
+
     private Integer inputTokens;
     private Integer outputTokens;
     private long retrievalMs;
     private long generationMs;
 
     public EvalResult(EvalRun run, EvalCase evalCase, ChatResult result,
-                      Boolean retrievalHit, ScoreResult keyword) {
+                      Boolean retrievalHit, ScoreResult keyword, JudgeResult judge) {   // ★ judge 추가
         this.run = run;
         this.caseId = evalCase.id();
         this.category = evalCase.category();
@@ -59,6 +66,9 @@ public class EvalResult {
         this.retrievalHit = retrievalHit;
         this.keywordPass = keyword.pass();
         this.keywordReason = keyword.reason();
+        this.judgeScore = judge.score();     // ★
+        this.judgePass = judge.pass();       // ★
+        this.judgeReason = judge.reason();   // ★
         this.inputTokens = result.inputTokens();
         this.outputTokens = result.outputTokens();
         this.retrievalMs = result.retrievalMs();
